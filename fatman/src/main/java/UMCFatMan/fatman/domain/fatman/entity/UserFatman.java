@@ -1,6 +1,6 @@
-package UMCFatMan.fatman.domain.fatman;
+package UMCFatMan.fatman.domain.fatman.entity;
 
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,12 +1,15 @@
-package UMCFatMan.fatman.domain.users;
+package UMCFatMan.fatman.domain.users.entity;
 
 import UMCFatMan.fatman.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -36,7 +39,7 @@ public class Users extends BaseEntity {
     private String address;
 
     @Column(name = "activated", nullable = false)
-    protected boolean activated = Boolean.FALSE;
+    protected boolean activated = Boolean.TRUE;
 
 
 }
