@@ -1,11 +1,16 @@
 package UMCFatMan.fatman.domain.users;
 
 import UMCFatMan.fatman.global.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
+@Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +24,10 @@ public class Users extends BaseEntity {
 
     @Column(name = "email")
     private String email;
+
+    @JsonIgnore
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "name")
     private String name;
