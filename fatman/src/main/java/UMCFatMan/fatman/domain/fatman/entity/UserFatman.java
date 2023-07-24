@@ -4,6 +4,7 @@ import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +29,12 @@ public class UserFatman extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "fatman_id")
     private Fatman fatman;
+
+
+    public UserFatman(Users user, Fatman fatman) {
+        this.user = user;
+        this.fatman = fatman;
+    }
 
 }
 
