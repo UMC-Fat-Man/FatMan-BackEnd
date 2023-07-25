@@ -1,5 +1,6 @@
 package UMCFatMan.fatman.domain.monster;
 
+import UMCFatMan.fatman.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "monster")
-public class Monster {
+public class Monster extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
