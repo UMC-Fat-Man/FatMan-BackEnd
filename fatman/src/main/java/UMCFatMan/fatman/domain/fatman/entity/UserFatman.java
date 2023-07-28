@@ -1,6 +1,6 @@
-package UMCFatMan.fatman.domain.fatman;
+package UMCFatMan.fatman.domain.fatman.entity;
 
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,5 +29,10 @@ public class UserFatman extends BaseEntity {
     @JoinColumn(name = "fatman_id")
     private Fatman fatman;
 
-}
 
+    public UserFatman(Users user, Fatman fatman) {
+        this.user = user;
+        this.fatman = fatman;
+    }
+
+}

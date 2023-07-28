@@ -1,6 +1,6 @@
 package UMCFatMan.fatman.global.jwt;
 
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.security.UserDetailsImpl;
 import UMCFatMan.fatman.global.security.UserDetailsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;

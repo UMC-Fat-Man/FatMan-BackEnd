@@ -1,7 +1,7 @@
 package UMCFatMan.fatman.domain.history;
 
 import UMCFatMan.fatman.domain.totalRank.TotalRank;
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.domain.weekRank.WeekRank;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
