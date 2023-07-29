@@ -1,8 +1,7 @@
 package UMCFatMan.fatman.domain.monster;
 
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

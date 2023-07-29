@@ -1,6 +1,6 @@
 package UMCFatMan.fatman.global.security;
 
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

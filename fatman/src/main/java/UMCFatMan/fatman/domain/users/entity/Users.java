@@ -1,4 +1,4 @@
-package UMCFatMan.fatman.domain.users;
+package UMCFatMan.fatman.domain.users.entity;
 
 import UMCFatMan.fatman.global.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;

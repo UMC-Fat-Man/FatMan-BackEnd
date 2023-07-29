@@ -1,4 +1,4 @@
-package UMCFatMan.fatman.domain.fatman;
+package UMCFatMan.fatman.domain.fatman.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
