@@ -1,5 +1,6 @@
-package UMCFatMan.fatman.domain.monster;
+package UMCFatMan.fatman.domain.monster.repository;
 
+import UMCFatMan.fatman.domain.monster.domain.UserMonster;
 import UMCFatMan.fatman.domain.users.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 

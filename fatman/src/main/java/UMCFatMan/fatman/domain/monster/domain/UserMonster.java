@@ -1,4 +1,4 @@
-package UMCFatMan.fatman.domain.monster;
+package UMCFatMan.fatman.domain.monster.domain;
 
 import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseEntity;
