@@ -19,39 +19,29 @@ public class MonsterController {
 
     private final MonsterService monsterService;
 
-    @GetMapping("/user_monster")
-    public ResponseEntity<?> getUserMonster(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return new ResponseEntity<>(monsterService.getUserMonster(userDetails), HttpStatus.OK);
-    }
-
-    @PostMapping("/user_monster")
-    public ResponseEntity<?> postUserMonster(@AuthenticationPrincipal UserDetailsImpl userDetails,
-                                             @RequestBody UserMonsterRequestDto userMonsterRequestDto)
-    {
-        return new ResponseEntity<>(monsterService.postUserMonster(userMonsterRequestDto, userDetails), HttpStatus.OK );
-    }
 
     @PostMapping("/monster")
     public ResponseEntity<?> addMosnter(@AuthenticationPrincipal UserDetailsImpl userDetails,
-                                        @RequestBody MonsterRequestDto monsterRequestDto,
+                                        @RequestParam("name") String monsterName,
                                         @RequestParam("image") MultipartFile multipartFile) throws IOException
     {
-        return new ResponseEntity<>(monsterService.addMonster(userDetails, monsterRequestDto, multipartFile), HttpStatus.OK);
+        return new ResponseEntity<>(monsterService.addMonster(userDetails, monsterName, multipartFile), HttpStatus.OK);
     }
 
     @PutMapping("/monster")
     public ResponseEntity<?> updateMonster(@AuthenticationPrincipal UserDetailsImpl userDetails,
-                                           @RequestBody MonsterRequestDto monsterRequestDto,
+                                           @RequestParam("name") String monsterName,
                                            @RequestParam("image") MultipartFile multipartFile) throws IOException
     {
-        return new ResponseEntity<>(monsterService.updateMonster(userDetails, monsterRequestDto, multipartFile), HttpStatus.OK);
+        return new ResponseEntity<>(monsterService.updateMonster(userDetails, monsterName, multipartFile), HttpStatus.OK);
     }
 
     @DeleteMapping("/monster")
     public ResponseEntity<?> deleteMonster(@AuthenticationPrincipal UserDetailsImpl userDetails,
-                                           @RequestBody MonsterRequestDto monsterRequestDto)
+                                           @RequestParam("name") String monsterName)
     {
-        return new ResponseEntity<>(monsterService.deleteMonster(userDetails, monsterRequestDto), HttpStatus.OK);
+        monsterService.deleteMonster(userDetails, monsterName);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 }

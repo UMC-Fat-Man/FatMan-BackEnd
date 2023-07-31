@@ -26,8 +26,7 @@ public class Monster extends BaseEntity {
     @Column(nullable = false)
     private String imageUrl;
 
-    public void update(MonsterRequestDto monsterRequestDto, String imageUrl) {
-        this.name = monsterRequestDto.getName();
+    public void update(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 }

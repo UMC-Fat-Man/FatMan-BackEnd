@@ -1,6 +1,7 @@
 package UMCFatMan.fatman.global.jwt;
 
 import UMCFatMan.fatman.domain.users.entity.Users;
+import UMCFatMan.fatman.global.exception.ErrorResponse;
 import UMCFatMan.fatman.global.security.UserDetailsImpl;
 import UMCFatMan.fatman.global.security.UserDetailsServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -56,9 +58,9 @@ public class JWTCheckFilter extends BasicAuthenticationFilter {
            objectMapper.registerModule(new JavaTimeModule());
            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-//           ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, "토큰이 유효하지 않습니다.");
+           ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, "토큰이 유효하지 않습니다.");
            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-//           response.getOutputStream().write(objectMapper.writeValueAsBytes(errorResponse));
+           response.getOutputStream().write(objectMapper.writeValueAsBytes(errorResponse));
        }
 
     }

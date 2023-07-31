@@ -37,6 +37,8 @@ dependencies {
 
 	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
 
+	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'
+
 }
 
 tasks.named('test') {
