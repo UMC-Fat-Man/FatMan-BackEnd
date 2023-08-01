@@ -1,6 +1,8 @@
-package UMCFatMan.fatman.domain.monster;
+package UMCFatMan.fatman.domain.monster.dto;
 
 
+import UMCFatMan.fatman.domain.monster.domain.Monster;
+import UMCFatMan.fatman.domain.monster.domain.UserMonster;
 import UMCFatMan.fatman.domain.users.entity.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

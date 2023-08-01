@@ -35,6 +35,10 @@ dependencies {
 	//로컬에서 직접 실행
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
+	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
+
+	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'
+
 }
 
 tasks.named('test') {

@@ -1,6 +1,7 @@
 package UMCFatMan.fatman.global.jwt;
 
 import UMCFatMan.fatman.domain.users.entity.Users;
+import UMCFatMan.fatman.global.exception.ErrorResponse;
 import UMCFatMan.fatman.global.security.UserDetailsImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -84,9 +86,9 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         SecurityContextHolder.clearContext();
 
-//        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, "사용자를 찾을 수 없습니다");
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, "사용자를 찾을 수 없습니다");
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-//        response.getOutputStream().write(objectMapper.writeValueAsBytes(errorResponse));
+        response.getOutputStream().write(objectMapper.writeValueAsBytes(errorResponse));
 
 
     }

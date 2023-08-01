@@ -1,18 +1,17 @@
 package UMCFatMan.fatman.domain.weekRank;
 
-import UMCFatMan.fatman.domain.history.History;
+import UMCFatMan.fatman.domain.users.entity.Users;
+import UMCFatMan.fatman.domain.weekRank.DTO.WeekRankPutRequestDto;
+import UMCFatMan.fatman.domain.weekRank.DTO.WeekRankResponseDto;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Getter
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "week_rank")
 public class WeekRank extends BaseRankEntity {
@@ -21,7 +20,23 @@ public class WeekRank extends BaseRankEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "weekRank")
-    private List<History> historyList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
 
+    @Column(name = "week_num")
+    private int weekNum;
+
+    @Column(name = "year_num")
+    private int yearNum;
+
+    public static WeekRank toEntity(WeekRankPutRequestDto dto, Users user) {
+        return WeekRank.builder()
+                .user(user)
+                .weekNum(dto.getWeekNum())
+                .yearNum(dto.getYearNum())
+                .distance(dto.getDistance())
+                .monsterNum(dto.getMonsterNum())
+                .build();
+    }
 }

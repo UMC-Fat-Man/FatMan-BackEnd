@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b007c13d-02d4-4e55-b8ad-2afb70827cc8" name="변경" comment="feat: 프로그램 초기 실행시 테스트용 데이터 추가">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/controller/UserMonsterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/service/UserMonsterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/S3/BucketDir.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/S3/ImageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/exception/CustomException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/exception/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/exception/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/exception/global/ImageNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/exception/monster/MonsterAlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/exception/monster/MonsterNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/exception/user/UserNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fatman/src/main/resources/application_example.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/controller/MonsterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/controller/MonsterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/domain/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/domain/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/repository/MonsterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/repository/MonsterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/repository/UserMonsterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/repository/UserMonsterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/service/MonsterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/monster/service/MonsterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/users/repository/UsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/domain/users/repository/UsersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/S3/S3Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/S3/S3Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/jwt/JWTCheckFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/jwt/JWTCheckFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/jwt/JWTLoginFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/jwt/JWTLoginFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/security/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/fatman/src/main/java/UMCFatMan/fatman/global/security/UserDetailsServiceImpl.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/fatman">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="com.haulmont.jpb.JpaEntity" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Sn6KEUBzmsGgcI7bEw2JQSnEk3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/유은정/Documents/GitHub/FatMan-BackEnd/fatman/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "라이브러리",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "9786af1d140409c138c7920c2b830c9b",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "h2",
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="UMCFatMan.fatman.domain.monster" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\유은정\Documents\GitHub\FatMan-BackEnd\fatman\src\main\resources" />
+      <recent name="C:\Users\유은정\Documents\GitHub\FatMan-BackEnd\fatman\src\main\java\UMCFatMan\fatman\global\jwt" />
+      <recent name="C:\Users\유은정\Documents\GitHub\FatMan-BackEnd\fatman\src\main\java\UMCFatMan\fatman\global\security" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="UMCFatMan.fatman.global.exception.user" />
+      <recent name="UMCFatMan.fatman.domain.monster.service" />
+      <recent name="UMCFatMan.fatman.domain.monster.controller" />
+      <recent name="UMCFatMan.fatman.domain.monster" />
+      <recent name="UMCFatMan.fatman.global.jwt" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="fatman.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="UMCFatMan.fatman.Application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UMCFatMan.fatman.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="b007c13d-02d4-4e55-b8ad-2afb70827cc8" name="변경" comment="" />
+      <created>1689769939028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1689769939028</updated>
+      <workItem from="1689769941837" duration="3422000" />
+      <workItem from="1689941725756" duration="1261000" />
+      <workItem from="1690114036270" duration="418000" />
+      <workItem from="1690114542192" duration="16922000" />
+      <workItem from="1690131491466" duration="1760000" />
+      <workItem from="1690150234384" duration="1054000" />
+      <workItem from="1690195290924" duration="4255000" />
+      <workItem from="1690199561338" duration="721000" />
+      <workItem from="1690726299941" duration="11918000" />
+      <workItem from="1690797953507" duration="17352000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: Spring Security 설정, monster 관련 api 구현">
+      <created>1690198881901</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1690198881901</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: monster 등록 관련 api 구현, s3 설정">
+      <created>1690732753493</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1690732753493</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: Spring Security 설정, monster 관련 api 구현" />
+    <MESSAGE value="feat: monster 등록 관련 api 구현, s3 설정" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: monster 등록 관련 api 구현, s3 설정" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.springframework.security.config.annotation.web.builders.HttpSecurity" memberName="filterOrders" />
+        <PinnedItemInfo parentTag="org.springframework.security.config.annotation.web.builders.HttpSecurity" memberName="requestMatcherConfigurer" />
+        <PinnedItemInfo parentTag="org.springframework.security.config.annotation.web.builders.HttpSecurity" memberName="configurers" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
