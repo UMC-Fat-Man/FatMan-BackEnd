@@ -1,15 +1,15 @@
 package UMCFatMan.fatman.domain.totalRank;
 
-import UMCFatMan.fatman.domain.history.History;
+import UMCFatMan.fatman.domain.totalRank.DTO.TotalRankRequestDto;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@SuperBuilder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +21,15 @@ public class TotalRank extends BaseRankEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "totalRank")
-    private List<History> historyList = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
+
+    public static TotalRank toEntity(TotalRankRequestDto dto, Users user) {
+        return TotalRank.builder()
+                .user(user)
+                .distance(dto.getDistance())
+                .monsterNum(dto.getMonsterNum())
+                .build();
+    }
 }

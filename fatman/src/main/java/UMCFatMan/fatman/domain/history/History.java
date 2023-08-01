@@ -1,16 +1,17 @@
 package UMCFatMan.fatman.domain.history;
 
-import UMCFatMan.fatman.domain.totalRank.TotalRank;
-import UMCFatMan.fatman.domain.users.entity.Users;
-import UMCFatMan.fatman.domain.weekRank.WeekRank;
+import UMCFatMan.fatman.domain.history.DTO.HistoryRequestDto;
+import UMCFatMan.fatman.domain.users.Users;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
+@Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,15 +28,13 @@ public class History extends BaseRankEntity {
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @ManyToOne
-    @JoinColumn(name = "week_rank_id")
-    private WeekRank weekRank;
-
-    @ManyToOne
-    @JoinColumn(name = "total_rank_id")
-    private TotalRank totalRank;
-
     @Column(name = "date")
     private Timestamp date;
 
+    public static History toHistory(HistoryRequestDto dto){
+        return History.builder()
+                .user(dto.getUser())
+                .date(dto.getDate())
+                .build();
+    }
 }
