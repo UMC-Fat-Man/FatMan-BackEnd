@@ -1,7 +1,7 @@
 package UMCFatMan.fatman.domain.history;
 
 import UMCFatMan.fatman.domain.history.DTO.HistoryRequestDto;
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,5 +36,10 @@ public class History extends BaseRankEntity {
                 .user(dto.getUser())
                 .date(dto.getDate())
                 .build();
+    }
+
+    public void update(HistoryRequestDto dto) {
+        this.user = dto.getUser();
+        this.date = dto.getDate();
     }
 }

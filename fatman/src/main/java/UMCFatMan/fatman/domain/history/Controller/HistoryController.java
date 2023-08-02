@@ -28,12 +28,14 @@ public class HistoryController {
     }
 
     @PatchMapping("/{id}")
-    public String updateHistory(@PathVariable("id") Long id) {
-        return "updateHistory";
+    public ResponseEntity<?> updateHistory(@PathVariable("id") Long id, @RequestBody HistoryRequestDto historyRequestDto) {
+        historyService.updateHistory(id, historyRequestDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping ("/{id}")
-    public String deleteHistory(@PathVariable("id") Long id) {
-        return "deleteHistory";
+    public ResponseEntity<?> deleteHistory(@PathVariable("id") Long id) {
+        historyService.deleteHistory(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
