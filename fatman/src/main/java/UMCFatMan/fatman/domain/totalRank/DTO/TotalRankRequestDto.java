@@ -1,12 +1,9 @@
 package UMCFatMan.fatman.domain.totalRank.DTO;
 
-import UMCFatMan.fatman.domain.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
-import org.springframework.stereotype.Service;
 
 @NoArgsConstructor
 @AllArgsConstructor
