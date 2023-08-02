@@ -23,25 +23,17 @@ public class WeekRankController {
     public ResponseEntity<?> getWeekRank() {
         return new ResponseEntity<>(weekRankService.getWeekRank(), HttpStatus.OK);
     }
+    
+    @GetMapping("/{year}/{week}")
+    public ResponseEntity<?>  getTopWeekRank(@PathVariable("year") int year, @PathVariable("week") int week){
+        return new ResponseEntity<>(weekRankService.getTopWeekRank(year,week),HttpStatus.OK);
+    }
 
     @PutMapping("/")
     public ResponseEntity<?> createWeekRank(@AuthenticationPrincipal UserDetailsImpl user, @RequestBody WeekRankPutRequestDto dto) {
         return new ResponseEntity<>(weekRankService.putWeekRank(user,dto),HttpStatus.OK);
     }
 
-    @GetMapping("/{year}/{week}")
-    public ResponseEntity<?>  getTopWeekRank(@PathVariable("year") int year, @PathVariable("week") int week){
-        return new ResponseEntity<>(weekRankService.getTopWeekRank(year,week),HttpStatus.OK);
-    }
 
-    @PatchMapping("/{id}")
-    public String updateWeekRank(@PathVariable("id") Long id) {
-        return "updateWeekRank";
-    }
-
-    @DeleteMapping("/{id}")
-    public String delteWeekRank(@PathVariable("id") Long id){
-        return "deleteWeekRank";
-    }
 
 }
