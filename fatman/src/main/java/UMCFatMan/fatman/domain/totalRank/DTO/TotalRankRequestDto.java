@@ -1,6 +1,5 @@
 package UMCFatMan.fatman.domain.totalRank.DTO;
 
-import UMCFatMan.fatman.domain.users.Users;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

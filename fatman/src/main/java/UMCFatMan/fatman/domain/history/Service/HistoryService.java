@@ -25,9 +25,19 @@ public class HistoryService {
     }
 
     @Transactional
-    public Object postHistory(HistoryRequestDto dto) {
+    public History postHistory(HistoryRequestDto dto) {
         History history = History.toHistory(dto);
         return historyRepository.save(history);
     }
 
+    @Transactional
+    public void updateHistory(Long id, HistoryRequestDto dto) {
+        History history = historyRepository.findById(id).orElseThrow();
+        history.update(dto);
+    }
+
+    @Transactional
+    public void deleteHistory(Long id) {
+        historyRepository.deleteById(id);
+    }
 }
