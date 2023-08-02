@@ -1,8 +1,7 @@
 package UMCFatMan.fatman.domain.history.DTO;
 
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

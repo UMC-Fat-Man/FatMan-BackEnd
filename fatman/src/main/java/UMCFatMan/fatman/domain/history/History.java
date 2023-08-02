@@ -1,17 +1,18 @@
 package UMCFatMan.fatman.domain.history;
 
 import UMCFatMan.fatman.domain.history.DTO.HistoryRequestDto;
-import UMCFatMan.fatman.domain.users.Users;
+import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
 
-@Builder
+@SuperBuilder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
