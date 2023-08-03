@@ -38,4 +38,9 @@ public class History extends BaseRankEntity {
                 .date(dto.getDate())
                 .build();
     }
+
+    public void update(HistoryRequestDto dto) {
+        this.user = dto.getUser();
+        this.date = dto.getDate();
+    }
 }
