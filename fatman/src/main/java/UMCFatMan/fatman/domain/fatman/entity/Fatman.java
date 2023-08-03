@@ -1,5 +1,6 @@
 package UMCFatMan.fatman.domain.fatman.entity;
 
+import UMCFatMan.fatman.global.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,18 +15,25 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name="fatman")
-public class Fatman {
+public class Fatman extends BaseEntity {
 
     @Id
     @Column(name="id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
 
+    @Column (name="name")
+    private String name ;
+
     @Column(name = "fatman_image_url", nullable = false)
     private String fatmanImageUrl ;
 
-    @Column(name = "updated_at", nullable = false)
-    private String updatedAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+    public void update(String name, String fatmanImageUrl) {
+        this.name = name ;
+        this.fatmanImageUrl = fatmanImageUrl;
+    }
 
 }
