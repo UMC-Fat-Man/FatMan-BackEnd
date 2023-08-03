@@ -71,13 +71,10 @@ public class FatmanService {
      */
     @Transactional
     public void deleteFatman(Long fatmanId) {
-        // Check if the Fatman exists
         Fatman fatman = getFatmanById(fatmanId);
         s3Service.deleteImage(fatman.getFatmanImageUrl());
-        // Perform the delete operation
         fatmanRepository.delete(fatman);
     }
-
 
 
 

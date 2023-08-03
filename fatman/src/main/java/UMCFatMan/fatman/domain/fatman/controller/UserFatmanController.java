@@ -25,13 +25,7 @@ public class UserFatmanController {
     public ResponseEntity<String> addUserFatman(
             @PathVariable Long fatmanId,
             @RequestBody AddFatmanRequestDto addFatmanRequestDto) {
-        try {
             return userFatmanService.addUserFatman(fatmanId, addFatmanRequestDto);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Fatman already exists for this user.");
-        }
     }
 
 
@@ -40,9 +34,6 @@ public class UserFatmanController {
      */
     @GetMapping("/{userId}")
     public ResponseEntity<UserFatmanResponseDto> getUserFatman(@PathVariable Long userId) {
-        if (userId == null) {
-            return ResponseEntity.notFound().build();
-        }
         UserFatmanResponseDto responseDto = userFatmanService.getUserFatman(userId);
         return ResponseEntity.ok(responseDto);
     }

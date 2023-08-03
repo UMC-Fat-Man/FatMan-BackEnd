@@ -9,6 +9,9 @@ import UMCFatMan.fatman.domain.fatman.repository.FatmanRepository;
 import UMCFatMan.fatman.domain.fatman.repository.UserFatmanRepository;
 import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.domain.users.repository.UsersRepository;
+import UMCFatMan.fatman.global.exception.fatman.FatmanAlreadyExistsUserException;
+import UMCFatMan.fatman.global.exception.fatman.FatmanNotFoundException;
+import UMCFatMan.fatman.global.exception.user.UserNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,14 +39,14 @@ public class UserFatmanService {
     public ResponseEntity<String> addUserFatman(Long fatmanId, AddFatmanRequestDto addFatmanRequestDto) {
         Long userId = addFatmanRequestDto.getUserId();
         Users user = userRepository.findById(userId)
-                .orElseThrow(() -> new NoSuchElementException("User not found."));
+                .orElseThrow(UserNotFoundException::new);
 
         Fatman fatman = fatmanRepository.findById(fatmanId)
-                .orElseThrow(() -> new NoSuchElementException("Fatman not found."));
+                .orElseThrow(FatmanNotFoundException::new);
 
         // 해당 유저가 팻맨을 이미 가졌는지 확인
         if (userFatmanRepository.existsByUserAndFatman(user, fatman)) {
-            throw new IllegalArgumentException("Fatman already exists for this user.");
+            throw new FatmanAlreadyExistsUserException();
         }
 
         UserFatman userFatman = fatmanMapper.toEntity( user, fatman);
@@ -58,6 +61,9 @@ public class UserFatmanService {
      */
     @Transactional
     public UserFatmanResponseDto getUserFatman(Long userId) {
+        Users user = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+        
         List<UserFatman> userFatmanList = userFatmanRepository.findByUserId(userId);
         List<Long> fatmanId = userFatmanList.stream()
                 .map(userFatman -> userFatman.getFatman().getId())
