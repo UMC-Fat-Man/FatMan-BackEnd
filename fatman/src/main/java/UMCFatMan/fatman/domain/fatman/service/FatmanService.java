@@ -1,74 +1,88 @@
 package UMCFatMan.fatman.domain.fatman.service;
 
-import UMCFatMan.fatman.domain.fatman.dto.AddFatmanRequestDto;
+import UMCFatMan.fatman.domain.fatman.dto.FatmanRequestDto;
 import UMCFatMan.fatman.domain.fatman.dto.FatmanResponseDto;
+import UMCFatMan.fatman.domain.fatman.dto.UserFatmanResponseDto;
 import UMCFatMan.fatman.domain.fatman.entity.Fatman;
-import UMCFatMan.fatman.domain.fatman.entity.UserFatman;
 import UMCFatMan.fatman.domain.fatman.mapper.FatmanMapper;
 import UMCFatMan.fatman.domain.fatman.repository.FatmanRepository;
-import UMCFatMan.fatman.domain.fatman.repository.UserFatmanRepository;
-import UMCFatMan.fatman.domain.users.entity.Users;
-import UMCFatMan.fatman.domain.users.repository.UsersRepository;
+import UMCFatMan.fatman.global.S3.BucketDir;
+import UMCFatMan.fatman.global.S3.ImageService;
+import UMCFatMan.fatman.global.S3.S3Service;
+import UMCFatMan.fatman.global.exception.fatman.FatmanNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class FatmanService {
 
-    private final UsersRepository userRepository;
     private final FatmanRepository fatmanRepository;
-    private final UserFatmanRepository userFatmanRepository;
     private final FatmanMapper fatmanMapper;
+    private final S3Service s3Service;
+    private final ImageService imageService;
 
 
 
     /*
-    //  팻맨 추가하기
+    //   팻맨 추가하기
      */
     @Transactional
-    public ResponseEntity<String> addFatman(Long fatmanId, AddFatmanRequestDto addFatmanRequestDto) {
-        Long userId = addFatmanRequestDto.getUserId();
-        Users user = userRepository.findById(userId)
-                .orElseThrow(() -> new NoSuchElementException("User not found."));
+    public Fatman addFatman(FatmanRequestDto fatmanRequestDto) throws IOException {
+        String fatmanName = fatmanRequestDto.getFatmanName();
+        String imageUrl = s3Service.uploadImage(BucketDir.FATMAN,  fatmanRequestDto.getFatmanImage());
 
-        Fatman fatman = fatmanRepository.findById(fatmanId)
-                .orElseThrow(() -> new NoSuchElementException("Fatman not found."));
-
-        // 해당 유저가 팻맨을 이미 가졌는지 확인
-        if (userFatmanRepository.existsByUserAndFatman(user, fatman)) {
-            throw new IllegalArgumentException("Fatman already exists for this user.");
-        }
-
-        UserFatman userFatman = fatmanMapper.toEntity( user, fatman);
-        userFatmanRepository.save(userFatman);
-        return ResponseEntity.ok("Fatman added successfully.");
+        return fatmanRepository.save(Fatman.builder()
+                .name(fatmanName)
+                .fatmanImageUrl(imageUrl)
+                .build());
     }
 
 
 
     /*
-    //  팻맨 조회하기
+    //  팻맨 수정하기
      */
     @Transactional
-    public FatmanResponseDto getFatman(Long userId) {
-        List<UserFatman> userFatmanList = userFatmanRepository.findByUserId(userId);
-        List<Long> fatmanId = userFatmanList.stream()
-                .map(userFatman -> userFatman.getFatman().getId())
-                .collect(Collectors.toList());
-        return fatmanMapper.toResponseDto(fatmanId);
+    public FatmanResponseDto updateFatman(Long fatmanId, FatmanRequestDto fatmanRequestDto) throws IOException {
+        Fatman fatman = getFatmanById(fatmanId);
+        String newfatmanName = fatmanRequestDto.getFatmanName();
+        String originalImageUrl = fatman.getFatmanImageUrl();
+        String newImageUrl = imageService.reUploadImage(BucketDir.FATMAN,  fatmanRequestDto.getFatmanImage(), originalImageUrl);
+
+        fatman.update(newfatmanName,newImageUrl);
+
+        Fatman updatedFatman = fatmanRepository.save(fatman);
+
+        return FatmanMapper.fromEntity(updatedFatman);
+
     }
 
 
 
+
+    /*
+    //  팻맨 삭제하기
+     */
+    @Transactional
+    public void deleteFatman(Long fatmanId) {
+        Fatman fatman = getFatmanById(fatmanId);
+        s3Service.deleteImage(fatman.getFatmanImageUrl());
+        fatmanRepository.delete(fatman);
+    }
+
+
+
+
+
+    private Fatman getFatmanById(Long fatmanId) {
+        return fatmanRepository.findById(fatmanId)
+                .orElseThrow(FatmanNotFoundException::new);
+    }
 
 }

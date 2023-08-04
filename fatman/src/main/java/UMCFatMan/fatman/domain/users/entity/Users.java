@@ -32,6 +32,10 @@ public class Users extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+//    @Column(name = "state")
+//    @Enumerated(EnumType.STRING)
+//    private Role state;
+
     @Column(name = "nickname")
     private String nickname;
 

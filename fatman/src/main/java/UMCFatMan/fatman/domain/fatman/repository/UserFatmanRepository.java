@@ -14,6 +14,8 @@ public interface UserFatmanRepository extends JpaRepository<UserFatman, Long> {
 
     List<UserFatman>findByUserId(Long UserId);
 
+    List<UserFatman>findByUser(Users users);
+
     boolean existsByUserAndFatman(Users user, Fatman fatman);
 
 }

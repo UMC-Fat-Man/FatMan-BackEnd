@@ -32,6 +32,7 @@ public class JWTCheckFilter extends BasicAuthenticationFilter {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
+    //JWT 토큰 확인 후 인증 정보 설정 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String bearer = request.getHeader("Access-Token");
@@ -40,9 +41,9 @@ public class JWTCheckFilter extends BasicAuthenticationFilter {
             chain.doFilter(request,response);
             return;
         }
-       String token = bearer.substring("auth_token:".length());
+       String token = bearer.substring("auth_token:".length());     // 헤더에서 JWT 토큰 문자열 추출
 
-       VerifyResultDto result = JWTUtil.verify(token);
+       VerifyResultDto result = JWTUtil.verify(token);              // 토큰 검증
 
        if(result.isSuccess()){
            UserDetailsImpl userDetailsImpl = (UserDetailsImpl) userDetailsServiceImpl.loadUserByUsername(result.getUserEmail());

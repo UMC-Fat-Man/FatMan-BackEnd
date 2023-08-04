@@ -1,18 +1,17 @@
 package UMCFatMan.fatman.domain.fatman.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class FatmanResponseDto {
 
-    private List<Long> fatmanId;
+    private Long FatmanId;
 
+    private String Name ;
+
+    private String FatmanImageUrl ;
 }
