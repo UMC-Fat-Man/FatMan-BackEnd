@@ -31,6 +31,7 @@ dependencies {
 
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation("com.auth0:java-jwt:3.16.0")
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	//로컬에서 직접 실행
 	runtimeOnly 'com.mysql:mysql-connector-j'
