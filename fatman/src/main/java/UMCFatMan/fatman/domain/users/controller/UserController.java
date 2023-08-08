@@ -2,13 +2,12 @@ package UMCFatMan.fatman.domain.users.controller;
 
 import UMCFatMan.fatman.domain.users.dto.SignupRequestDto;
 import UMCFatMan.fatman.domain.users.service.UserService;
+import UMCFatMan.fatman.global.exception.user.UserEmailAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -26,10 +25,16 @@ public class UserController {
             userService.signUp(signupRequestDto);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email already exists");
+            throw new UserEmailAlreadyExistsException();
         }
-
-
     }
+
+
+
+    /*
+    //   유저 탈퇴 -> 휴면계정을 전환
+    */
+
+
 
 }

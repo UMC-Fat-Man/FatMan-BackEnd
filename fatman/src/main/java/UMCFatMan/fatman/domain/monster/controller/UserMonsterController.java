@@ -16,6 +16,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class UserMonsterController {
 
     private final UserMonsterService userMonsterService;

@@ -12,6 +12,18 @@ spring:
       hibernate:
         format_sql: true
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: ${SECURITY_OAUTH2_GOOGLE_CLIENT_ID}
+            clientSecret: ${SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET}
+            redirectUri: http://localhost:8080/login/oauth2/code/google
+            scope:
+              - email
+              - profile
+
   logging.level:
     org.hibernate.SQL: debug
 
@@ -29,15 +41,4 @@ cloud:
       auto: false
 
 
-#  jwt:
-#    secret-key:
 
-#  security:
-#    oauth2.client:
-#      registration:
-#        google:
-#          clientId: ${SECURITY_OAUTH2_GOOGLE_CLIENT_ID}
-#          clientSecret: ${SECURITY_OAUTH2_GOOGLE_CLIENT_SECRECT}
-#          scope:
-#            - email
-#            - profile

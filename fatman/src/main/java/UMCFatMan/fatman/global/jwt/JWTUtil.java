@@ -5,6 +5,7 @@ import UMCFatMan.fatman.domain.users.entity.Users;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -45,8 +46,10 @@ public class JWTUtil {
 
         } catch (Exception ex) {
             DecodedJWT decode = JWT.decode(token);
-            return VerifyResultDto.builder().success(false)
-                    .userEmail(decode.getSubject()).build();
+            return VerifyResultDto.builder()
+                    .success(false)
+                    .userEmail(decode.getSubject())
+                    .build();
         }
     }
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/weekRank")
+@RequestMapping("/api/weekRank")
 public class WeekRankController {
 
     @Autowired
