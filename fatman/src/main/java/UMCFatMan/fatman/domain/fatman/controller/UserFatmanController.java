@@ -3,9 +3,11 @@ package UMCFatMan.fatman.domain.fatman.controller;
 import UMCFatMan.fatman.domain.fatman.dto.AddFatmanRequestDto;
 import UMCFatMan.fatman.domain.fatman.dto.UserFatmanResponseDto;
 import UMCFatMan.fatman.domain.fatman.service.UserFatmanService;
+import UMCFatMan.fatman.global.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -23,18 +25,18 @@ public class UserFatmanController {
      */
     @PostMapping("/{fatmanId}")
     public ResponseEntity<String> addUserFatman(
-            @PathVariable Long fatmanId,
-            @RequestBody AddFatmanRequestDto addFatmanRequestDto) {
-            return userFatmanService.addUserFatman(fatmanId, addFatmanRequestDto);
+            @AuthenticationPrincipal UserDetailsImpl userDetails,
+            @PathVariable Long fatmanId ) {
+            return userFatmanService.addUserFatman(userDetails, fatmanId);
     }
 
 
     /*
     //  유저의 팻맨 조회하기
      */
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserFatmanResponseDto> getUserFatman(@PathVariable Long userId) {
-        UserFatmanResponseDto responseDto = userFatmanService.getUserFatman(userId);
+    @GetMapping
+    public ResponseEntity<UserFatmanResponseDto> getUserFatman(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        UserFatmanResponseDto responseDto = userFatmanService.getUserFatman(userDetails);
         return ResponseEntity.ok(responseDto);
     }
 
