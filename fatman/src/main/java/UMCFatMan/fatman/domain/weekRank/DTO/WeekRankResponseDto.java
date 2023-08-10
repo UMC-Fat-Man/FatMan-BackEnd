@@ -23,7 +23,7 @@ public class WeekRankResponseDto {
 
     private int monsterNum;
 
-    private int distance;
+    private double distance;
 
     public static WeekRankResponseDto toDTO(WeekRank entity){
         return WeekRankResponseDto.builder()

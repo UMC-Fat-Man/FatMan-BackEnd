@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface WeekRankRepository extends JpaRepository<WeekRank,Long> {
 
-    List<WeekRank> findTop10ByWeekNumAndYearNumOrderByDistanceDesc(int yearNum, int weekNum);
+    List<WeekRank> findTop10ByYearNumAndWeekNumOrderByDistanceDesc(int yearNum, int weekNum);
 
     Optional<WeekRank> findByYearNumAndWeekNum(int year, int week);
 }

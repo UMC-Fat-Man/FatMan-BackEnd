@@ -5,12 +5,9 @@ import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.sql.Timestamp;
 
 @SuperBuilder
 @Getter
@@ -30,17 +27,13 @@ public class History extends BaseRankEntity {
     private Users user;
 
     @Column(name = "date")
-    private Timestamp date;
+    private String date;
 
-    public static History toHistory(HistoryRequestDto dto){
+    public static History toHistory(HistoryRequestDto dto, Users user) {
         return History.builder()
-                .user(dto.getUser())
+                .user(user)
                 .date(dto.getDate())
                 .build();
     }
 
-    public void update(HistoryRequestDto dto) {
-        this.user = dto.getUser();
-        this.date = dto.getDate();
-    }
 }

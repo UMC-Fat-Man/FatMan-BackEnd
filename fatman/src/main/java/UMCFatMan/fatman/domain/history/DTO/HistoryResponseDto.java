@@ -7,8 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-
 @Getter
 @Builder
 @NoArgsConstructor
@@ -17,9 +15,9 @@ public class HistoryResponseDto {
 
     private Long id;
     private Users user;
-    private Timestamp date;
+    private String date;
     private int monsterNum;
-    private int distance;
+    private double distance;
 
     public static HistoryResponseDto toDTO(History entity){
         return HistoryResponseDto.builder()

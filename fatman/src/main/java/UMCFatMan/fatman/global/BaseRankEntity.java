@@ -16,6 +16,6 @@ public class BaseRankEntity {
     private int monsterNum;
 
     @Column(name = "distance")
-    private int distance;
+    private double distance;
 
 }

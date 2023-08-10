@@ -1,8 +1,7 @@
 package UMCFatMan.fatman.domain.weekRank;
 
+import UMCFatMan.fatman.domain.history.DTO.HistoryWeekRankDto;
 import UMCFatMan.fatman.domain.users.entity.Users;
-import UMCFatMan.fatman.domain.weekRank.DTO.WeekRankPutRequestDto;
-import UMCFatMan.fatman.domain.weekRank.DTO.WeekRankResponseDto;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
+
 @NoArgsConstructor
 @Getter
 @Entity
@@ -30,9 +30,9 @@ public class WeekRank extends BaseRankEntity {
     @Column(name = "year_num")
     private int yearNum;
 
-    public static WeekRank toEntity(WeekRankPutRequestDto dto, Users user) {
+    public static WeekRank toEntity(HistoryWeekRankDto dto) {
         return WeekRank.builder()
-                .user(user)
+                .user(dto.getUser())
                 .weekNum(dto.getWeekNum())
                 .yearNum(dto.getYearNum())
                 .distance(dto.getDistance())

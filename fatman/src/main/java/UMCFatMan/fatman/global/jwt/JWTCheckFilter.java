@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -45,14 +46,18 @@ public class JWTCheckFilter extends BasicAuthenticationFilter {
        VerifyResultDto result = JWTUtil.verify(token);
 
        if(result.isSuccess()){
+
            UserDetailsImpl userDetailsImpl = (UserDetailsImpl) userDetailsServiceImpl.loadUserByUsername(result.getUserEmail());
+
            Users user = userDetailsImpl.getUser();
 
-           UsernamePasswordAuthenticationToken userToken = new UsernamePasswordAuthenticationToken(
-                   user.getEmail(), null
-           );
 
+           Authentication userToken = new UsernamePasswordAuthenticationToken(
+                   userDetailsImpl, null
+           );
+           System.out.println("userToken = " + userToken.getClass().getName());
            SecurityContextHolder.getContext().setAuthentication(userToken);
+
            chain.doFilter(request,response);
        } else {
            objectMapper.registerModule(new JavaTimeModule());

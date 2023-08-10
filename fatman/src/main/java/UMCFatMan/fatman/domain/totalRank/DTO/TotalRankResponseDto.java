@@ -19,7 +19,7 @@ public class TotalRankResponseDto {
 
     private int monsterNum;
 
-    private int distance;
+    private double distance;
 
     public static TotalRankResponseDto toDTO(TotalRank entity){
         return TotalRankResponseDto.builder()
