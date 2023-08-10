@@ -32,17 +32,19 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         setFilterProcessesUrl("/api/users/signin");
     }
 
+
+    // 로그인 시도를 처리하는 메서드
     @SneakyThrows
     @Override
     public Authentication attemptAuthentication(
             HttpServletRequest reqeust,
             HttpServletResponse response) throws AuthenticationException {
 
-        String refreshToken = reqeust.getHeader("RefreshToken");
+        String refreshToken = reqeust.getHeader("RefreshToken");    // 요청 헤더에서 RefreshToken 을 읽어옴
 
-        LoginRequestDto userLogin = objectMapper.readValue(reqeust.getInputStream(), LoginRequestDto.class);
+        LoginRequestDto userLogin = objectMapper.readValue(reqeust.getInputStream(), LoginRequestDto.class);   // 로그인 정보
 
-        if (refreshToken == null) {
+        if (refreshToken == null) {    // 리프레시 토큰이없는 경우
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                     userLogin.getEmail(), userLogin.getPassword(), null);
             return getAuthenticationManager().authenticate(token);
@@ -59,6 +61,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         }
     }
 
+    // 로그인 성공 시 호출되는 메서드 -> JWT 토큰 생성 후 응답 헤더에 추가
     @Override
     protected void successfulAuthentication(
             HttpServletRequest request,
@@ -71,12 +74,13 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         response.setHeader("Refresh-Token", "refresh_token:" + jwt.makeRefreshToken(user));
         response.setHeader("Access-Token", "auth_token:" + jwt.makeAuthToken(user));
-        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);       // JSON 형식으로 반환해 응답 본문에 담아 반환
 
         response.getOutputStream().write(objectMapper.writeValueAsBytes(user));
 
     }
 
+    // 로그인 실패시 호출 되는 메서드
     @Override
     protected void unsuccessfulAuthentication(
             HttpServletRequest request,
