@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TotalRankRepository extends JpaRepository<TotalRank,Long> {
-    List<TotalRank> findTop10byOrderByDistanceDesc();
+    List<TotalRank> findTop10ByOrderByDistanceDesc();
     Optional<TotalRank> findByUser(Users user);
 }

@@ -13,6 +13,6 @@ public class TotalRankRequestDto {
 
     private int monsterNum;
 
-    private int distance;
+    private double distance;
 
 }

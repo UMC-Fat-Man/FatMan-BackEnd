@@ -1,6 +1,6 @@
 package UMCFatMan.fatman.domain.totalRank;
 
-import UMCFatMan.fatman.domain.totalRank.DTO.TotalRankRequestDto;
+import UMCFatMan.fatman.domain.history.DTO.HistoryTotalRankDto;
 import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.global.BaseRankEntity;
 import jakarta.persistence.*;
@@ -25,9 +25,9 @@ public class TotalRank extends BaseRankEntity {
     @JoinColumn(name = "user_id")
     private Users user;
 
-    public static TotalRank toEntity(TotalRankRequestDto dto, Users user) {
+    public static TotalRank toEntity(HistoryTotalRankDto dto) {
         return TotalRank.builder()
-                .user(user)
+                .user(dto.getUser())
                 .distance(dto.getDistance())
                 .monsterNum(dto.getMonsterNum())
                 .build();

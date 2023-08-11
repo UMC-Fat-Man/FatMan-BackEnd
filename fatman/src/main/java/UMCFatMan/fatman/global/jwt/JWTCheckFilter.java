@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -47,13 +48,20 @@ public class JWTCheckFilter extends BasicAuthenticationFilter {
 
        if(result.isSuccess()){   // 검증 성공시 -> 사용자 인증 정보 알수 있다.
            UserDetailsImpl userDetailsImpl = (UserDetailsImpl) userDetailsServiceImpl.loadUserByUsername(result.getUserEmail());
+
            Users user = userDetailsImpl.getUser();
+
 
            UsernamePasswordAuthenticationToken userToken = new UsernamePasswordAuthenticationToken(
                    userDetailsImpl,  null
            );
 
+           Authentication userToken = new UsernamePasswordAuthenticationToken(
+                   userDetailsImpl, null
+           );
+           System.out.println("userToken = " + userToken.getClass().getName());
            SecurityContextHolder.getContext().setAuthentication(userToken);
+
            chain.doFilter(request,response);
        } else {
            objectMapper.registerModule(new JavaTimeModule());
