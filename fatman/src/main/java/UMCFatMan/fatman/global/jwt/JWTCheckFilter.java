@@ -26,14 +26,14 @@ import java.io.IOException;
 public class JWTCheckFilter extends BasicAuthenticationFilter {
 
     private UserDetailsServiceImpl userDetailsServiceImpl;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper = new ObjectMapper();   // 사용자 상세 정보 설정
 
     public JWTCheckFilter(AuthenticationManager authenticationManager, UserDetailsServiceImpl userDetailsServiceImpl) {
         super(authenticationManager);
         this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
-    //JWT 토큰 확인 후 인증 정보 설정 
+    //JWT 토큰 확인 후 인증 정보 설정 -> HTTP 요청이 들어올때마다 실행
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String bearer = request.getHeader("Access-Token");
@@ -46,8 +46,7 @@ public class JWTCheckFilter extends BasicAuthenticationFilter {
 
        VerifyResultDto result = JWTUtil.verify(token);              // 토큰 검증
 
-       if(result.isSuccess()){
-
+       if(result.isSuccess()){   // 검증 성공시 -> 사용자 인증 정보 알수 있다.
            UserDetailsImpl userDetailsImpl = (UserDetailsImpl) userDetailsServiceImpl.loadUserByUsername(result.getUserEmail());
 
            Users user = userDetailsImpl.getUser();

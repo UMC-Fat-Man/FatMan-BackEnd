@@ -102,10 +102,11 @@ public class AuthService {
     //   헤더로 리프레시 토큰과 액세스 토큰을 받아와 검증하고 액세스 토큰의 검증에 실패해도 리프레시 토큰이 성공하면 재발급
     */
     @Transactional
-    public HttpHeaders refreshToken(String refreshToken, String accessToken) {
+    public HttpHeaders jwtAuthorize(UserTokenDto userTokenDto) {
+        String refreshToken = userTokenDto.getRefreshToken();
+        String accessToken = userTokenDto.getAccessToken();
         VerifyResultDto refreshVerifyResult = jwtUtil.verify(refreshToken);       // 리프레시 토큰 검증
-        VerifyResultDto accessVerifyResult = jwtUtil.verify(accessToken);        // 액세스 토큰 검증
-
+//        VerifyResultDto accessVerifyResult = jwtUtil.verify(accessToken);        // 액세스 토큰 검증  -> 검증 실패시 오류 발생
 
         // 리프레시 토큰이 유효하지 않을 경우 예외 처리
         if (!refreshVerifyResult.isSuccess()) {
@@ -116,15 +117,14 @@ public class AuthService {
                 .orElseThrow(() -> new UserNotFoundException());
 
         HttpHeaders responseHeaders = new HttpHeaders();
-
         // 액세스 토큰만 유효하지 않을 경우 혹은 둘다 유효할 경우 새로운 액세스 토큰과 리프레시 토큰 생성
-        if (!accessVerifyResult.isSuccess() || accessVerifyResult.isSuccess() && refreshVerifyResult.isSuccess()) {
+//        if (!accessVerifyResult.isSuccess() || accessVerifyResult.isSuccess() && refreshVerifyResult.isSuccess()) {
             String newAccessToken = jwtUtil.makeAuthToken(user);
             String newRefreshToken = jwtUtil.makeRefreshToken(user);
 
             responseHeaders.set("Refresh-Token", "refresh_token:" + newRefreshToken);
             responseHeaders.set("Access-Token", "access_token:" + newAccessToken);
-        }
+//        }
 
         return responseHeaders;
 
@@ -133,7 +133,7 @@ public class AuthService {
 
 
 
-    private SocialLoginResponseDto handleExistingUser(Users user) {             // 기존 유저 로그인 메서드
+    private SocialLoginResponseDto handleExistingUser(Users user) {                // 기존 유저 로그인 메서드
         String jwtToken = jwtUtil.makeAuthToken(user);
         String refreshToken = jwtUtil.makeRefreshToken(user);
         return new SocialLoginResponseDto(false, jwtToken, refreshToken);
@@ -150,11 +150,6 @@ public class AuthService {
         String refreshToken = jwtUtil.makeRefreshToken(user);
         return new SocialLoginResponseDto(true, jwtToken, refreshToken);
     }
-
-
-
-
-
 
 
 

@@ -1,9 +1,6 @@
 package UMCFatMan.fatman.domain.users.controller;
 
-import UMCFatMan.fatman.domain.users.dto.SocialDetailRequestDto;
-import UMCFatMan.fatman.domain.users.dto.SocialLoginRequestDto;
-import UMCFatMan.fatman.domain.users.dto.SocialLoginResponseDto;
-import UMCFatMan.fatman.domain.users.dto.UserDetailResponseDto;
+import UMCFatMan.fatman.domain.users.dto.*;
 import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.domain.users.mapper.UserMapper;
 import UMCFatMan.fatman.domain.users.repository.UsersRepository;
@@ -63,13 +60,12 @@ public class AuthController {
     //   Jwt 검증 및 재발급
     //   헤더로 리프레시 토큰과 액세스 토큰을 받아와 검증하고 액세스 토큰의 검증에 실패해도 리프레시 토큰이 성공하면 재발급
     */
-//    @GetMapping("/refresh")
-//    public ResponseEntity<Void> authorize(
-//            @RequestHeader("Refresh-Token") String refreshToken,
-//            @RequestHeader("Access-Token") String accessToken) {
-//        authService.refreshToken(refreshToken, accessToken);
-//        return ResponseEntity.ok().build();
-//    }
+    @GetMapping("/refresh")
+    public ResponseEntity<Void> jwtAuthorize(
+            @RequestBody UserTokenDto userTokenDto) {
+        HttpHeaders headers = authService.jwtAuthorize(userTokenDto);
+        return ResponseEntity.ok().headers(headers).build();
+    }
 
 
 

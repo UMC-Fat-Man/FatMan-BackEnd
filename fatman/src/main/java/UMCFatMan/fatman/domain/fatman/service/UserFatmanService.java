@@ -12,6 +12,7 @@ import UMCFatMan.fatman.domain.users.repository.UsersRepository;
 import UMCFatMan.fatman.global.exception.fatman.FatmanAlreadyExistsUserException;
 import UMCFatMan.fatman.global.exception.fatman.FatmanNotFoundException;
 import UMCFatMan.fatman.global.exception.user.UserNotFoundException;
+import UMCFatMan.fatman.global.security.UserDetailsImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +37,8 @@ public class UserFatmanService {
     //  유저 팻맨 추가하기
      */
     @Transactional
-    public ResponseEntity<String> addUserFatman(Long fatmanId, AddFatmanRequestDto addFatmanRequestDto) {
-        Long userId = addFatmanRequestDto.getUserId();
+    public ResponseEntity<String> addUserFatman(UserDetailsImpl userDetails, Long fatmanId ) {
+        Long userId = userDetails.getUser().getId();
         Users user = userRepository.findById(userId)
                 .orElseThrow(UserNotFoundException::new);
 
@@ -60,7 +61,8 @@ public class UserFatmanService {
     //  유저의 팻맨 조회하기
      */
     @Transactional
-    public UserFatmanResponseDto getUserFatman(Long userId) {
+    public UserFatmanResponseDto getUserFatman(UserDetailsImpl userDetails) {
+        Long userId = userDetails.getUser().getId();
         Users user = userRepository.findById(userId)
                 .orElseThrow(UserNotFoundException::new);
         

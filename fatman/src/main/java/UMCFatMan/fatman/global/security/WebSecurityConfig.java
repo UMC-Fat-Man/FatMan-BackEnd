@@ -2,7 +2,6 @@ package UMCFatMan.fatman.global.security;
 
 import UMCFatMan.fatman.global.oauth2.CustomOAuth2FailureHandler;
 import UMCFatMan.fatman.global.oauth2.CustomOAuth2SuccessHandler;
-import UMCFatMan.fatman.global.oauth2.CustomOAuth2UserService;
 import UMCFatMan.fatman.global.jwt.JWTCheckFilter;
 import UMCFatMan.fatman.global.jwt.JWTLoginFilter;
 import lombok.RequiredArgsConstructor;
@@ -32,16 +31,12 @@ public class WebSecurityConfig {
 
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
     private String googleClientId;
-
     @Value("${spring.security.oauth2.client.registration.google.clientSecret}")
     private String googleClientSecret;
-
     @Value("${spring.security.oauth2.client.registration.google.redirectUri}")
     private String googleRedirectUri;
-
     private final CorsConfig config;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
-    private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomOAuth2FailureHandler customOAuth2FailureHandler;
     private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
     private static final String[] AUTH_WHITE_LIST = {
@@ -68,7 +63,6 @@ public class WebSecurityConfig {
                     oauth2Login
                             .redirectionEndpoint()
                             .baseUri("/login/oauth2/code/*");
-                    // 사용자 정보 엔드포인트 설정 제거 (필요한 경우 다른 로직으로 대체)
                     oauth2Login
                             .successHandler(customOAuth2SuccessHandler)
                             .failureHandler(customOAuth2FailureHandler);
@@ -102,6 +96,7 @@ public class WebSecurityConfig {
         return new InMemoryClientRegistrationRepository(googleClientRegistration());
     }
 
+    // 구글 설정
     private ClientRegistration googleClientRegistration() {
         return ClientRegistration.withRegistrationId("google")
                 .clientId(googleClientId)

@@ -6,6 +6,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserTokenDto {
-    private String jwtToken;
     private String refreshToken;
+    private String accessToken;
 }
