@@ -24,7 +24,6 @@ jobs:
           distribution: 'adopt'
 
       - name: access to secrets
-        working-directory : /src/main/resources/env
         run: |
           echo "AWS_DB_HOST=${{secrets.AWS_DB_HOST}}"  >> env.yml
           echo "AWS_DB_DATABASE_NAME=${{secrets.AWS_DB_DATABASE_NAME}}" >> env.yml
