@@ -56,9 +56,6 @@ public class JWTCheckFilter extends BasicAuthenticationFilter {
                    userDetailsImpl,  null
            );
 
-           Authentication userToken = new UsernamePasswordAuthenticationToken(
-                   userDetailsImpl, null
-           );
            System.out.println("userToken = " + userToken.getClass().getName());
            SecurityContextHolder.getContext().setAuthentication(userToken);
 
