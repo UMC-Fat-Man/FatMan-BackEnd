@@ -23,57 +23,48 @@ jobs:
       - name: access to secrets
         working-directory : ./fatman/src/main/resources/env
         run:
-          echo "AWS_DB_HOST=$AWS_DB_HOST"  >> env.yml
-      - name: access to secrets
-        working-directory : ./fatman/src/main/resources/env
-        run:
-          echo "AWS_DB_DATABASE_NAME" >> env.yml
+          echo "AWS_DB_HOST=${{AWS_DB_HOST}}"  >> env.yml
           
       - name: access to secrets
         working-directory : ./fatman/src/main/resources/env
         run:
-          echo "AWS_DB_USERNAME" >> env.yml
+          echo "AWS_DB_DATABASE_NAME=${{AWS_DB_DATABASE_NAME}}" >> env.yml
           
       - name: access to secrets
         working-directory : ./fatman/src/main/resources/env
         run:
-          echo "AWS_DB_PASSWORD" >> env.yml
+          echo "AWS_DB_USERNAME=${{AWS_DB_USERNAME}}" >> env.yml
+          
+      - name: access to secrets
+        working-directory : ./fatman/src/main/resources/env
+        run:
+          echo "AWS_DB_PASSWORD=${{AWS_DB_PASSWORD}}" >> env.yml
 
       - name: access to secrets
         working-directory : ./fatman/src/main/resources/env
         run:
-          echo "AWS_S3_BUCKET_NAME" >> env.yml
+          echo "AWS_S3_BUCKET_NAME=${{AWS_S3_BUCKET_NAME}}" >> env.yml
           
       - name: access to secrets
         working-directory : ./fatman/src/main/resources/env
         run:
-          echo "AWS_ACCESS_KEY_ID"  >>env.yml
+          echo "AWS_ACCESS_KEY_ID=${{AWS_ACCESS_KEY_ID}}"  >>env.yml
           
       - name: access to secrets
         working-directory : ./fatman/src/main/resources/env
         run:
-          echo "AWS_SECRET_ACCESS_KEY" >>env.yml
+          echo "AWS_SECRET_ACCESS_KEY=${{AWS_SECRET_ACCESS_KEY}}" >>env.yml
           
       - name: access to secrets
         working-directory : ./fatman/src/main/resources/env
         run:
-          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_ID" >>env.yml
+          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_ID=${{SECURITY_OAUTH2_GOOGLE_CLIENT_ID}}" >>env.yml
           
       - name: access to secrets
         working-directory : ./fatman/src/main/resources/env
         run:
-          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET" >>env.yml
-          
-        env:
-          AWS_DB_HOST: ${{secrets.AWS_DB_HOST}}
-          AWS_DB_DATABASE_NAME: ${{secrets.AWS_DB_DATABASE_NAME}}
-          MAP_API_KEY: ${{secrets.MAP_API_KEY}}
-          AWS_DB_PASSWORD: ${{secrets.AWS_DB_PASSWORD}}
-          AWS_S3_BUCKET_NAME: ${{secrets.AWS_S3_BUCKET_NAME}}
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          SECURITY_OAUTH2_GOOGLE_CLIENT_ID: ${{secrets.SECURITY_OAUTH2_GOOGLE_CLIENT_ID}}
-          SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET: ${{secrets.SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET}}
+          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET=${{SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET}}" >>env.yml
+        
 
       - name: Grant execute permission for gradlew
         working-directory: ./fatman
