@@ -3,7 +3,7 @@ name: fatman-자동화
 on:
   push:
     branches:
-      - main
+      - 자동화
   workflow_dispatch: # 브랜치 push 뿐만 아니라 수동 실행도 가능하게 해줌
 
 jobs:
