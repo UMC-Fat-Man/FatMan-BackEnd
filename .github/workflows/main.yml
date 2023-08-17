@@ -21,11 +21,11 @@ jobs:
           distribution: 'adopt'
 
       - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew # gradle wrapper를 실행할 수 있도록 권한 부여
+        run: chmod +x ./fatman/gradlew # gradle wrapper를 실행할 수 있도록 권한 부여
         shell: bash
 
       - name: Build with Gradle
-        run: ./gradlew clean build # 프로젝트 빌드
+        run: ./fatman/gradlew clean build # 프로젝트 빌드
         shell: bash
 
       - name: Get current time
