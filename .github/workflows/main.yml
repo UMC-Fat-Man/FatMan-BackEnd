@@ -9,8 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest # 깃허브 액션 스크립트가 작동될 OS 환경 지정
-    default :
-      working-directory : ./fatman
+    defaults :
+      run :
+       working-directory : ./fatman
 
     steps:
       - name: Checkout
