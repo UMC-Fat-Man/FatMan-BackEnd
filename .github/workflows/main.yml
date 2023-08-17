@@ -25,7 +25,7 @@ jobs:
 
       - name: access to secrets
         working-directory : /src/main/resources/env
-        run:
+        run: |
           echo "AWS_DB_HOST=${{secrets.AWS_DB_HOST}}"  >> env.yml
           
       - name: access to secrets
