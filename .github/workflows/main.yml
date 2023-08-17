@@ -71,11 +71,9 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-        shell: bash
 
       - name: Build with Gradle
         run: ./gradlew clean build
-        shell: bash
 
       - name: Get current time
         uses: 1466587594/get-current-time@v2  # 빌드 완료 시간 가져오기
