@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @PropertySource(value = {
-		"classpath:env/env.yml"
+		"classpath:env.yml"
 		}, factory = EnvConfig.class)
 public class Application {
 
