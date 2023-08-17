@@ -21,19 +21,18 @@ jobs:
           distribution: 'adopt'
 
       - name: access to secrets
-        working-directory: ./fatman/src/main/resources/env
         run:
-          echo "AWS_DB_HOST=$AWS_DB_HOST"  >> .env
-          echo "AWS_DB_DATABASE_NAME" >> .env
-          echo "AWS_DB_USERNAME" >> .env
-          echo "AWS_DB_PASSWORD" >> .env
+          echo "AWS_DB_HOST=$AWS_DB_HOST"  >> ./fatman/src/main/resources/env/.env
+          echo "AWS_DB_DATABASE_NAME" >> ./fatman/src/main/resources/env/.env
+          echo "AWS_DB_USERNAME" >> ./fatman/src/main/resources/env/.env
+          echo "AWS_DB_PASSWORD" >> ./fatman/src/main/resources/env/.env
           
-          echo "AWS_S3_BUCKET_NAME" >> .env
-          echo "AWS_ACCESS_KEY_ID"  >> .env
-          echo "AWS_SECRET_ACCESS_KEY" >> .env
+          echo "AWS_S3_BUCKET_NAME" >> ./fatman/src/main/resources/env/.env
+          echo "AWS_ACCESS_KEY_ID"  >>./fatman/src/main/resources/env/.env
+          echo "AWS_SECRET_ACCESS_KEY" >> ./fatman/src/main/resources/env/.env
 
-          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_ID" >> .env
-          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET" >> .env
+          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_ID" >> ./fatman/src/main/resources/env/.env
+          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET" >>./fatman/src/main/resources/env/.env
           
         env:
           AWS_DB_HOST: ${{secrets.AWS_DB_HOST}}
