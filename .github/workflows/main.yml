@@ -21,7 +21,7 @@ jobs:
           distribution: 'adopt'
 
       - name: access to secrets
-        working-directory: ../fatman/src/main/resources/env
+        working-directory: ./fatman/src/main/resources/env
         run:
           echo "AWS_DB_HOST=$AWS_DB_HOST"  >> .env
           echo "AWS_DB_DATABASE_NAME" >> .env
