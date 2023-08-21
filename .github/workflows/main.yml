@@ -52,3 +52,22 @@ jobs:
       - name: Show Current Time
         run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}" # 빌드 완료 시간 출력하기
         shell: bash
+
+      - name: Generate deployment package
+        run: |
+          mkdir -p deploy
+          cp fatman/build/libs/fatman-0.0.1-SNAPSHOT.jar deploy/fatman-application-prod-ebextensions-1.jar
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cd deploy && zip -r fatman-application-prod-label-${{steps.current-time.outputs.formattedTime}}-${{github.sha}}.
+
+          - name: Deploy Consumer to EB
+          uses: einaregilsson/beanstalk-deploy@v14
+          with:
+            aws_access_key: ${{ secrets.AWS_IAM_ACCESS_KEY_ID }}
+            aws_secret_key: ${{ secrets.AWS_IAM_SECRET_ACCESS_KEY }}
+            application_name: fatmanEB
+            environment_name: fatmanEB-env
+            version_label: fatman-application-prod-label-${{steps.current-time.outputs.formattedTime}}-${{github.sha}}
+            region: ap-northeast-2
+            deployment_package: deploy/fatman-application-prod-label-${{steps.current-time.outputs.formattedTime}}-${{github.sha}}.zip
