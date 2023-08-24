@@ -22,19 +22,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-
-      - name: access to secrets
-        working-directory : ./fatman
-        run: |
-          echo "AWS_DB_HOST=${{secrets.AWS_DB_HOST}}"  >> env.yml
-          echo "AWS_DB_DATABASE_NAME=${{secrets.AWS_DB_DATABASE_NAME}}" >> env.yml
-          echo "AWS_DB_USERNAME=${{secrets.AWS_DB_USERNAME}}" >> env.y
-          echo "AWS_DB_PASSWORD=${{secrets.AWS_DB_PASSWORD}}" >> env.yml
-          echo "AWS_S3_BUCKET_NAME=${{secrets.AWS_S3_BUCKET_NAME}}" >> env.yml
-          echo "AWS_ACCESS_KEY_ID=${{secrets.AWS_ACCESS_KEY_ID}}"  >>env.yml
-          echo "AWS_SECRET_ACCESS_KEY=${{secrets.AWS_SECRET_ACCESS_KEY}}" >>env.yml
-          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_ID=${{secrets.SECURITY_OAUTH2_GOOGLE_CLIENT_ID}}" >>env.yml
-          echo "SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET=${{secrets.SECURITY_OAUTH2_GOOGLE_CLIENT_SECRET}}" >>env.yml
         
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
