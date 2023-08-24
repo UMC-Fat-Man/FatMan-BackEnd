@@ -3,7 +3,7 @@ name: fatman-자동화
 on:
   push:
     branches:
-      - 자동화
+      - main
   workflow_dispatch:
 
 jobs:
