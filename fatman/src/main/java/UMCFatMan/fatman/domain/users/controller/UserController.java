@@ -6,6 +6,8 @@ import UMCFatMan.fatman.global.exception.user.UserEmailAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -34,7 +36,11 @@ public class UserController {
     /*
     //   유저 탈퇴 -> 휴면계정을 전환
     */
-
+    @DeleteMapping
+    public ResponseEntity<Void> deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
+        userService.deleteUser(userDetails);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }

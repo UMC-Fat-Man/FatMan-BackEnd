@@ -28,6 +28,6 @@ public class SignupRequestDto {
                 .birth(dto.getBirth())
                 .build();
 
-    };
+    }
 
 }

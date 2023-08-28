@@ -6,6 +6,7 @@ import UMCFatMan.fatman.domain.users.mapper.UserMapper;
 import UMCFatMan.fatman.domain.users.repository.UsersRepository;
 import UMCFatMan.fatman.domain.users.service.AuthService;
 import UMCFatMan.fatman.global.security.UserDetailsImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,14 +59,17 @@ public class AuthController {
 
     /*
     //   Jwt 검증 및 재발급
-    //   헤더로 리프레시 토큰과 액세스 토큰을 받아와 검증하고 액세스 토큰의 검증에 실패해도 리프레시 토큰이 성공하면 재발급
     */
     @GetMapping("/refresh")
-    public ResponseEntity<Void> jwtAuthorize(
-            @RequestBody UserTokenDto userTokenDto) {
-        HttpHeaders headers = authService.jwtAuthorize(userTokenDto);
+    public ResponseEntity<Void> jwtAuthorize(HttpServletRequest request) {
+        // 헤더에서 토큰 가져오기
+        String refreshToken = request.getHeader("Refresh-Token").replace("refresh_token:", "");
+        String accessToken = request.getHeader("Access-Token").replace("auth_token:", "");
+
+        HttpHeaders headers = authService.jwtAuthorize(refreshToken, accessToken);
         return ResponseEntity.ok().headers(headers).build();
     }
+
 
 
 
