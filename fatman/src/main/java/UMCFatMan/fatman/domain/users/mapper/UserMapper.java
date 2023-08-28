@@ -29,6 +29,17 @@ public class UserMapper {
         user.setBirth(socialDetailRequestDto.getBirth());
     }
 
+
+    public static Users toUserEntity(UserDetailResponseDto responseDto) {
+        Users user = new Users();
+        user.setEmail(responseDto.getEmail());
+        user.setName(responseDto.getName());
+        user.setNickname(responseDto.getNickname());
+        user.setAddress(responseDto.getAddress());
+        user.setBirth(responseDto.getBirth());
+        return user;
+    }
+
     public static UserDetailResponseDto toUserDetailResponseDto(Users user) {
         UserDetailResponseDto responseDto = new UserDetailResponseDto();
         responseDto.setEmail(user.getEmail());

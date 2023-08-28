@@ -1,6 +1,8 @@
 package UMCFatMan.fatman.domain.users.controller;
 
+import UMCFatMan.fatman.domain.fatman.dto.UserFatmanResponseDto;
 import UMCFatMan.fatman.domain.users.dto.SignupRequestDto;
+import UMCFatMan.fatman.domain.users.dto.UserDetailResponseDto;
 import UMCFatMan.fatman.domain.users.service.UserService;
 import UMCFatMan.fatman.global.exception.user.UserEmailAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,15 @@ public class UserController {
         }
     }
 
+
+    /*
+    //   내 정보 조회
+    */
+    @GetMapping
+    public ResponseEntity<UserDetailResponseDto> getUserInfo (@AuthenticationPrincipal UserDetails userDetails) {
+        UserDetailResponseDto userDetailResponseDto = userService.getUserInfo(userDetails);
+        return ResponseEntity.ok(userDetailResponseDto);
+    }
 
 
     /*
