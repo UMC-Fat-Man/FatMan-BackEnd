@@ -1,0 +1,58 @@
+name: fatman-자동화
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Grant execute permission for gradlew
+        working-directory : fatman
+        run: chmod +x gradlew
+        
+      - name: Build with Gradle
+        working-directory : fatman
+        run: ./gradlew clean build
+
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss
+          utcOffset: "+09:00"
+
+      - name: Show Current Time
+        run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
+        shell: bash
+
+      - name: Generate deployment package
+        run: |
+          mkdir -p deploy
+          cp fatman/build/libs/fatman-0.0.1-SNAPSHOT.jar deploy/fatman-application-prod-ebextensions-1.jar
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cd deploy && zip -r fatman-application-prod-label-${{steps.current-time.outputs.formattedTime}}-${{github.sha}} .
+      - name: Deploy Consumer to EB
+        uses: einaregilsson/beanstalk-deploy@v14
+        with:
+          aws_access_key: ${{ secrets.AWS_IAM_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_IAM_SECRET_ACCESS_KEY }}
+          application_name: fatmanEB
+          environment_name: fatmanEB-env
+          version_label: fatman-application-prod-label-${{steps.current-time.outputs.formattedTime}}-${{github.sha}}
+          region: ap-northeast-2
+          deployment_package: deploy/fatman-application-prod-label-${{steps.current-time.outputs.formattedTime}}-${{github.sha}}.zip
