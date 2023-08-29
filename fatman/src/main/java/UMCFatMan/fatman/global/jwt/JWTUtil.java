@@ -16,8 +16,9 @@ public class JWTUtil {
 
 
     public static final Algorithm ALGORITHM = Algorithm.HMAC256("hahaha");
-    private static final long AUTH_TIME = 20 * 60;
-    private static final long REFRESH_TIME = 60 * 60 * 24 * 7;
+    private static final long AUTH_TIME = 12 * 60 * 60;           // 12 hours
+    private static final long REFRESH_TIME = 30 * 24 * 60 * 60;   // 30 days (1 month)
+
 
     // 사용자 정보를 받아와서 인증 토큰을 생성
     public String makeAuthToken(Users user) {

@@ -12,6 +12,8 @@ import UMCFatMan.fatman.global.jwt.JWTUtil;
 import UMCFatMan.fatman.global.jwt.VerifyResultDto;
 import UMCFatMan.fatman.global.security.UserDetailsImpl;
 import com.amazonaws.services.kms.model.NotFoundException;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -99,14 +102,13 @@ public class AuthService {
 
     /*
     //   Jwt 검증 및 재발급
-    //   헤더로 리프레시 토큰과 액세스 토큰을 받아와 검증하고 액세스 토큰의 검증에 실패해도 리프레시 토큰이 성공하면 재발급
+    //   헤더로 리프레시 토큰과 액세스 토큰을 받아와 검증, 리프레시 토큰의 만료 시간을 확인
+    //   1. 새로운 액세스 토큰을 발급  2. 만료 기간이 1주일 미만일 경우 새로운 리프레시 토큰을 발급
     */
     @Transactional
-    public HttpHeaders jwtAuthorize(UserTokenDto userTokenDto) {
-        String refreshToken = userTokenDto.getRefreshToken();
-        String accessToken = userTokenDto.getAccessToken();
-        VerifyResultDto refreshVerifyResult = jwtUtil.verify(refreshToken);       // 리프레시 토큰 검증
-//        VerifyResultDto accessVerifyResult = jwtUtil.verify(accessToken);        // 액세스 토큰 검증  -> 검증 실패시 오류 발생
+    public HttpHeaders jwtAuthorize(String refreshToken, String accessToken) {
+        // 토큰 검증
+        VerifyResultDto refreshVerifyResult = jwtUtil.verify(refreshToken); // 리프레시 토큰 검증
 
         // 리프레시 토큰이 유효하지 않을 경우 예외 처리
         if (!refreshVerifyResult.isSuccess()) {
@@ -117,29 +119,44 @@ public class AuthService {
                 .orElseThrow(() -> new UserNotFoundException());
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        // 액세스 토큰만 유효하지 않을 경우 혹은 둘다 유효할 경우 새로운 액세스 토큰과 리프레시 토큰 생성
-//        if (!accessVerifyResult.isSuccess() || accessVerifyResult.isSuccess() && refreshVerifyResult.isSuccess()) {
-            String newAccessToken = jwtUtil.makeAuthToken(user);
-            String newRefreshToken = jwtUtil.makeRefreshToken(user);
 
+        // 액세스 토큰을 생성
+        String newAccessToken = jwtUtil.makeAuthToken(user);
+        responseHeaders.set("Access-Token", "auth_token:" + newAccessToken);
+
+        // 리프레시 토큰의 만료 시간 확인
+        DecodedJWT decodedRefreshToken = JWT.decode(refreshToken);
+        long tokenExpirationTime = decodedRefreshToken.getClaim("exp").asLong();
+        long currentTime = Instant.now().getEpochSecond();
+
+        // 만료 기간이 1주일 미만일 경우 새로운 리프레시 토큰을 발급
+        if (tokenExpirationTime - currentTime < 7 * 24 * 60 * 60) {
+            String newRefreshToken = jwtUtil.makeRefreshToken(user);
             responseHeaders.set("Refresh-Token", "refresh_token:" + newRefreshToken);
-            responseHeaders.set("Access-Token", "access_token:" + newAccessToken);
-//        }
+        } else {
+            // 만료 기간이 1주일 이상 남았다면 기존의 리프레시 토큰을 그대로 반환
+            responseHeaders.set("Refresh-Token", "refresh_token:" + refreshToken);
+        }
 
         return responseHeaders;
-
     }
 
 
 
 
-    private SocialLoginResponseDto handleExistingUser(Users user) {                // 기존 유저 로그인 메서드
+    /*
+         기존 유저 로그인 로직
+     */
+    private SocialLoginResponseDto handleExistingUser(Users user) {
         String jwtToken = jwtUtil.makeAuthToken(user);
         String refreshToken = jwtUtil.makeRefreshToken(user);
         return new SocialLoginResponseDto(false, jwtToken, refreshToken);
     }
 
-    private SocialLoginResponseDto handleNewUser(String email, String name) {       // 신규 유저 로그인시 -> 생성 로직
+    /*
+    신규 유저 로그인시 -> 생성 로직
+     */
+    private SocialLoginResponseDto handleNewUser(String email, String name) {
         UserEmailNameDto userEmailNameDto = new UserEmailNameDto();
         userEmailNameDto.setEmail(email);
         userEmailNameDto.setName(name);
