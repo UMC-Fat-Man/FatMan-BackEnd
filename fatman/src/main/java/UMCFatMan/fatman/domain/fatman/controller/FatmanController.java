@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -48,6 +49,15 @@ public class FatmanController {
         return ResponseEntity.ok("Fatman deleted successfully");
     }
 
+
+
+    /*
+    //  팻맨 목록 조회하기
+     */
+    @GetMapping
+    public ResponseEntity<List<FatmanResponseDto>> getFatmanList() {
+        return ResponseEntity.ok(fatmanService.getFatmanList());
+    }
 
 
 }

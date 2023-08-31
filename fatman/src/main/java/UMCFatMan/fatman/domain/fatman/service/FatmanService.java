@@ -15,7 +15,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -78,6 +80,15 @@ public class FatmanService {
 
 
 
+    /*
+    //  팻맨 목록 조회하기
+     */
+    @Transactional
+    public List<FatmanResponseDto> getFatmanList() {
+        return fatmanRepository.findAll().stream()
+                .map(FatmanMapper::fromEntity)
+                .collect(Collectors.toList());
+    }
 
 
     private Fatman getFatmanById(Long fatmanId) {
