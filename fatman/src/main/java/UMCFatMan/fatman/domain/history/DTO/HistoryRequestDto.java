@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Builder
 
 @Getter
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class HistoryRequestDto {
 
-    private String date;
+    private LocalDateTime date;
     private int monsterNum;
     private double distance;
 

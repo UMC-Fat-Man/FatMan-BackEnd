@@ -5,6 +5,7 @@ import UMCFatMan.fatman.domain.history.DTO.HistoryResponseDto;
 import UMCFatMan.fatman.domain.history.DTO.HistoryTotalRankDto;
 import UMCFatMan.fatman.domain.history.DTO.HistoryWeekRankDto;
 import UMCFatMan.fatman.domain.history.History;
+import UMCFatMan.fatman.domain.history.Repository.GetHistoryMapping;
 import UMCFatMan.fatman.domain.history.Repository.HistoryRepository;
 import UMCFatMan.fatman.domain.totalRank.Service.TotalRankService;
 import UMCFatMan.fatman.domain.weekRank.Service.WeekRankService;
@@ -14,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
@@ -32,8 +33,12 @@ public class HistoryService {
     TotalRankService totalRankService;
 
     @Transactional
-    public List<HistoryResponseDto> getHistory() {
-        List<History> histories = historyRepository.findAll();
+    public List<HistoryResponseDto> getHistory(UserDetailsImpl user, LocalDate date) {
+        LocalDateTime startDatetime = LocalDateTime.of(date.getYear(),date.getMonth(),date.getDayOfMonth(),0,0,0);
+        LocalDateTime endDatetime = LocalDateTime.of(date.getYear(),date.getMonth(),date.getDayOfMonth(),23,59,59);
+
+        List<GetHistoryMapping> histories = historyRepository.findAllByUser_IdAndDateBetween(user.getUser().getId(), startDatetime,endDatetime);
+
         return histories.stream().map(HistoryResponseDto::toDTO).toList();
     }
 
@@ -54,7 +59,6 @@ public class HistoryService {
         }
 
         History history = History.toHistory(dto, user.getUser());
-        System.out.println("user = " + user);
         return historyRepository.save(history);
     }
 
@@ -81,17 +85,15 @@ public class HistoryService {
 
 
     //문자열을 시간으로
-    public Map<String, Integer> stringTodate(String datestr) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(datestr, formatter);
+    public Map<String, Integer> stringTodate(LocalDateTime datestr) throws ParseException {
 
-        WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int weekNumber = dateTime.get(weekFields.weekOfWeekBasedYear());
+        int weekNumber = datestr.get(WeekFields.ISO.weekOfYear());
 
         Map<String, Integer> dateInfo = new HashMap<>();
 
         dateInfo.put("week", weekNumber);
-        dateInfo.put("year", dateTime.getYear());
+        dateInfo.put("year", datestr.getYear());
+        dateInfo.put("day", datestr.getDayOfMonth());
         return dateInfo;
     }
 }

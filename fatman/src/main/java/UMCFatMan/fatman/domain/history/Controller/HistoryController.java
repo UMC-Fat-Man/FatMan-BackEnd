@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/api/history")
 public class HistoryController {
@@ -18,8 +21,8 @@ public class HistoryController {
     HistoryService historyService;
 
     @GetMapping()
-    public ResponseEntity<?> getHistory() {
-        return new ResponseEntity<>(historyService.getHistory(), HttpStatus.OK);
+    public ResponseEntity<?> getHistory(@AuthenticationPrincipal UserDetailsImpl user, @RequestParam("date") LocalDate date) {
+        return new ResponseEntity<>(historyService.getHistory(user, date), HttpStatus.OK);
     }
 
     @PostMapping()
