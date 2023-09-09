@@ -62,7 +62,7 @@ public class WebSecurityConfig {
                             .authorizationRequestRepository(customAuthorizationRequestRepository());
                     oauth2Login
                             .redirectionEndpoint()
-                            .baseUri("/login/oauth2/code/**");
+                            .baseUri("/login/oauth2/code/*");
                     oauth2Login
                             .successHandler(customOAuth2SuccessHandler)
                             .failureHandler(customOAuth2FailureHandler);
