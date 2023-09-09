@@ -29,7 +29,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Value("${spring.security.oauth2.client.registration.google.client-id}")
+    @Value("${spring.security.oauth2.client.registration.google.clientId}")
     private String googleClientId;
     @Value("${spring.security.oauth2.client.registration.google.clientSecret}")
     private String googleClientSecret;
