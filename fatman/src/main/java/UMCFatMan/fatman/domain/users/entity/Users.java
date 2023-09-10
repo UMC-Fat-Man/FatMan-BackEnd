@@ -47,6 +47,9 @@ public class Users extends BaseEntity {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "money")
+    private int money;
+
     @Column(name = "activated", nullable = false)
     protected boolean activated = Boolean.TRUE;
 
