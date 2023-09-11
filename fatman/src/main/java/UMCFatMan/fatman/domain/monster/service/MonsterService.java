@@ -52,6 +52,11 @@ public class MonsterService {
         monsterRepository.delete(monster);
     }
 
+    @Transactional(readOnly = true)
+    public Monster getRandomMonster(UserDetailsImpl userDetails) {
+        return monsterRepository.getRandomMonster();
+    }
+
     private Monster getMonsterByName(String monsterName) {
         return monsterRepository.findByName(monsterName)
                 .orElseThrow(MonsterNotFoundException::new);
