@@ -30,10 +30,14 @@ public class Fatman extends BaseEntity {
     @Column(name = "fatman_image_url", nullable = false)
     private String fatmanImageUrl ;
 
+    @Column(name = "cost")
+    private int cost ;
 
-    public void update(String name, String fatmanImageUrl) {
+
+    public void update(String name, String fatmanImageUrl, int cost) {
         this.name = name ;
         this.fatmanImageUrl = fatmanImageUrl;
+        this.cost = cost;
     }
 
 }

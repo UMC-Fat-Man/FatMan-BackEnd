@@ -15,4 +15,6 @@ public class FatmanRequestDto {
     private String fatmanName;
 
     private MultipartFile fatmanImage ;
+
+    private int fatmanCost;
 }

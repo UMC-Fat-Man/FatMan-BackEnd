@@ -14,4 +14,6 @@ public class FatmanResponseDto {
     private String Name ;
 
     private String FatmanImageUrl ;
+
+    private int FatmanCost;
 }
