@@ -16,6 +16,7 @@ public enum ErrorCode {
     SOCIAL_AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, "U002","사용자가 OAuth2 로그인에 실패하였습니다."),
     EMAIL_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "U003", "이미 존재하는 이메일입니다."),
     REFRESH_TOKEN_IS_INVALID(HttpStatus.BAD_REQUEST, "U004", "리프레시 토큰이 유효하지 않습니다."),
+    USER_HAVE_NO_MONEY(HttpStatus.BAD_REQUEST, "U005", "유저의 잔액이 부족합니다."),
     MONSTER_NOT_FOUND(HttpStatus.NOT_FOUND, "M001", "존재하지 않는 몬스터입니다."),
     MONSTER_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "M002", "이미 잡은 몬스터입니다."),
     IMAGE_NOT_FOUND(HttpStatus.BAD_REQUEST, "I001", "유효하지 않은 이미지입니다."),

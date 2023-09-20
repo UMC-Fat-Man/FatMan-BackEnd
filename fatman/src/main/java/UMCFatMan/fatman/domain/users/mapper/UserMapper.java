@@ -47,6 +47,7 @@ public class UserMapper {
         responseDto.setNickname(user.getNickname());
         responseDto.setAddress(user.getAddress());
         responseDto.setBirth(user.getBirth());
+        responseDto.setMoney(user.getMoney());
         return responseDto;
     }
 

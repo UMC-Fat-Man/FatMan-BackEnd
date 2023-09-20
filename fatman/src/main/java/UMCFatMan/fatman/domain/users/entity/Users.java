@@ -59,4 +59,8 @@ public class Users extends BaseEntity {
         this.name = name;
     }
 
+    public void updateMoney(int money){
+        this.money = money;
+    }
+
 }
