@@ -47,6 +47,9 @@ public class Users extends BaseEntity {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "money")
+    private int money;
+
     @Column(name = "activated", nullable = false)
     protected boolean activated = Boolean.TRUE;
 
@@ -54,6 +57,10 @@ public class Users extends BaseEntity {
     public Users(String email, String name) {
         this.email = email;
         this.name = name;
+    }
+
+    public void updateMoney(int money){
+        this.money = money;
     }
 
 }

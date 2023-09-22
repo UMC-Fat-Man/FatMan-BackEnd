@@ -11,6 +11,7 @@ import UMCFatMan.fatman.domain.users.entity.Users;
 import UMCFatMan.fatman.domain.users.repository.UsersRepository;
 import UMCFatMan.fatman.global.exception.fatman.FatmanAlreadyExistsUserException;
 import UMCFatMan.fatman.global.exception.fatman.FatmanNotFoundException;
+import UMCFatMan.fatman.global.exception.user.UserNoMoneyException;
 import UMCFatMan.fatman.global.exception.user.UserNotFoundException;
 import UMCFatMan.fatman.global.security.UserDetailsImpl;
 import jakarta.transaction.Transactional;
@@ -42,6 +43,7 @@ public class UserFatmanService {
         Users user = userRepository.findById(userId)
                 .orElseThrow(UserNotFoundException::new);
 
+
         Fatman fatman = fatmanRepository.findById(fatmanId)
                 .orElseThrow(FatmanNotFoundException::new);
 
@@ -50,8 +52,25 @@ public class UserFatmanService {
             throw new FatmanAlreadyExistsUserException();
         }
 
-        UserFatman userFatman = fatmanMapper.toEntity( user, fatman);
+        // 해당 유저의 money 가져오기
+        int UserMoney = user.getMoney();
+
+        // 팻맨의 cost 가져오기
+        int FatmanCost = fatman.getCost();
+
+        // 해당 유저에 money에서 팻맨 cost 빼고 -> DB에 저장
+        int NewUserMoney = UserMoney - FatmanCost ;
+
+        // 유저 돈 부족하면 오류
+        if (NewUserMoney < 1) {
+            throw new UserNoMoneyException() ;
+        }
+
+        user.setMoney(NewUserMoney);
+
+        UserFatman userFatman = fatmanMapper.toEntity(user, fatman);
         userFatmanRepository.save(userFatman);
+
         return ResponseEntity.ok("Fatman added successfully.");
     }
 

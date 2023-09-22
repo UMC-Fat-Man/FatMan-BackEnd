@@ -38,6 +38,7 @@ public class FatmanMapper {
                 .FatmanId(fatman.getId())
                 .Name(fatman.getName())
                 .FatmanImageUrl(fatman.getFatmanImageUrl())
+                .FatmanCost(fatman.getCost())
                 .build();
     }
 

@@ -38,10 +38,12 @@ public class FatmanService {
     public Fatman addFatman(FatmanRequestDto fatmanRequestDto) throws IOException {
         String fatmanName = fatmanRequestDto.getFatmanName();
         String imageUrl = s3Service.uploadImage(BucketDir.FATMAN,  fatmanRequestDto.getFatmanImage());
+        int fatmanCost = fatmanRequestDto.getFatmanCost();
 
         return fatmanRepository.save(Fatman.builder()
                 .name(fatmanName)
                 .fatmanImageUrl(imageUrl)
+                .cost(fatmanCost)
                 .build());
     }
 
@@ -54,10 +56,12 @@ public class FatmanService {
     public FatmanResponseDto updateFatman(Long fatmanId, FatmanRequestDto fatmanRequestDto) throws IOException {
         Fatman fatman = getFatmanById(fatmanId);
         String newfatmanName = fatmanRequestDto.getFatmanName();
+        int newCost = fatmanRequestDto.getFatmanCost();
         String originalImageUrl = fatman.getFatmanImageUrl();
         String newImageUrl = imageService.reUploadImage(BucketDir.FATMAN,  fatmanRequestDto.getFatmanImage(), originalImageUrl);
 
-        fatman.update(newfatmanName,newImageUrl);
+
+        fatman.update(newfatmanName,newImageUrl,newCost);
 
         Fatman updatedFatman = fatmanRepository.save(fatman);
 

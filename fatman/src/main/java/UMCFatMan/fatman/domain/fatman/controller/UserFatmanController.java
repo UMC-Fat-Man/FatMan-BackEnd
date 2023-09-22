@@ -21,7 +21,7 @@ public class UserFatmanController {
     private final UserFatmanService userFatmanService;
 
     /*
-    //  유저 팻맨 추가하기
+    //  유저 팻맨 구매하기
      */
     @PostMapping("/{fatmanId}")
     public ResponseEntity<String> addUserFatman(

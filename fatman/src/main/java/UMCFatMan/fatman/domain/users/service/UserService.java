@@ -1,7 +1,11 @@
 package UMCFatMan.fatman.domain.users.service;
 
 
+import UMCFatMan.fatman.domain.fatman.entity.Fatman;
 import UMCFatMan.fatman.domain.fatman.entity.UserFatman;
+import UMCFatMan.fatman.domain.fatman.mapper.FatmanMapper;
+import UMCFatMan.fatman.domain.fatman.repository.FatmanRepository;
+import UMCFatMan.fatman.domain.fatman.repository.UserFatmanRepository;
 import UMCFatMan.fatman.domain.users.dto.SignupRequestDto;
 import UMCFatMan.fatman.domain.users.dto.UserDetailResponseDto;
 import UMCFatMan.fatman.domain.users.entity.AuthProvider;
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -24,7 +29,11 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UsersRepository userRepository;
+
+    private final FatmanRepository fatmanRepository ;
+    private final UserFatmanRepository userFatmanRepository;
     private final PasswordEncoder passwordEncoder;
+    private final FatmanMapper fatmanMapper;
 
 
     /*
@@ -39,6 +48,13 @@ public class UserService {
         Users user = requestDto.getUser(requestDto, passwordEncoder);
         user.setActivated(true);
         user.setAuthProvider(AuthProvider.LOCAL);
+
+        // 팻맨 id 1 추가
+        Long fatmanId = Long.valueOf(1);
+        Fatman fatman = fatmanRepository.findById(1L).orElseThrow(() -> new RuntimeException("Fatman with ID 1 not found"));
+        UserFatman userFatman = new UserFatman(user, fatman);
+        userFatmanRepository.save(userFatman);
+
         userRepository.save(user);
     }
 

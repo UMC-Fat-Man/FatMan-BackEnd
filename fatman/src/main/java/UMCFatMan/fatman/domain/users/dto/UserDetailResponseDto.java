@@ -16,5 +16,6 @@ public class UserDetailResponseDto {
     private String nickname ;
     private String address ;
     private String birth;
+    private int money ;
 
 }
