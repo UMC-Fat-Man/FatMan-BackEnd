@@ -11,4 +11,7 @@ import java.util.List;
 public interface HistoryRepository extends JpaRepository<History,Long> {
 
     List<GetHistoryMapping> findAllByUser_IdAndDateBetween(Long id, LocalDateTime start, LocalDateTime end);
+
+    List<GetHistoryDate> findAllByUser_Id(Long id);
+
 }

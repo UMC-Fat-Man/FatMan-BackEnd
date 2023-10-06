@@ -20,9 +20,14 @@ public class HistoryController {
     @Autowired
     HistoryService historyService;
 
-    @GetMapping()
-    public ResponseEntity<?> getHistory(@AuthenticationPrincipal UserDetailsImpl user, @RequestParam("date") LocalDate date) {
-        return new ResponseEntity<>(historyService.getHistory(user, date), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<?> getHistoryByDate(@AuthenticationPrincipal UserDetailsImpl user, @RequestParam("date") LocalDate date) {
+        return new ResponseEntity<>(historyService.getHistoryByDate(user, date), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getHistory(@AuthenticationPrincipal UserDetailsImpl user) {
+        return new ResponseEntity<>(historyService.getHistory(user), HttpStatus.OK);
     }
 
     @PostMapping()
