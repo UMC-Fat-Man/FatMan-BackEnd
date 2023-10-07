@@ -5,6 +5,7 @@ import UMCFatMan.fatman.domain.history.DTO.HistoryResponseDto;
 import UMCFatMan.fatman.domain.history.DTO.HistoryTotalRankDto;
 import UMCFatMan.fatman.domain.history.DTO.HistoryWeekRankDto;
 import UMCFatMan.fatman.domain.history.History;
+import UMCFatMan.fatman.domain.history.Repository.GetHistoryDate;
 import UMCFatMan.fatman.domain.history.Repository.GetHistoryMapping;
 import UMCFatMan.fatman.domain.history.Repository.HistoryRepository;
 import UMCFatMan.fatman.domain.totalRank.Service.TotalRankService;
@@ -33,7 +34,15 @@ public class HistoryService {
     TotalRankService totalRankService;
 
     @Transactional
-    public List<HistoryResponseDto> getHistory(UserDetailsImpl user, LocalDate date) {
+    public List<GetHistoryDate> getHistory(UserDetailsImpl user) {
+
+        List<GetHistoryDate> histories = historyRepository.findAllByUser_Id(user.getUser().getId());
+
+        return histories;
+    }
+
+    @Transactional
+    public List<HistoryResponseDto> getHistoryByDate(UserDetailsImpl user, LocalDate date) {
         LocalDateTime startDatetime = LocalDateTime.of(date.getYear(),date.getMonth(),date.getDayOfMonth(),0,0,0);
         LocalDateTime endDatetime = LocalDateTime.of(date.getYear(),date.getMonth(),date.getDayOfMonth(),23,59,59);
 
