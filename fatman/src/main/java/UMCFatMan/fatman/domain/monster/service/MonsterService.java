@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -55,6 +56,12 @@ public class MonsterService {
     @Transactional(readOnly = true)
     public Monster getRandomMonster(UserDetailsImpl userDetails) {
         return monsterRepository.getRandomMonster();
+    }
+
+    @Transactional
+    public List<Monster> getAllMonster(UserDetailsImpl userDetails) {
+        return monsterRepository.findAll();
+
     }
 
     private Monster getMonsterByName(String monsterName) {

@@ -21,10 +21,17 @@ public class MonsterController {
     private final MonsterService monsterService;
 
     @GetMapping("/random-monster")
-    public ResponseEntity<?> getRandomMonster(@AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException
+    public ResponseEntity<?> getRandomMonster(@AuthenticationPrincipal UserDetailsImpl userDetails)
     {
         return new ResponseEntity<>(monsterService.getRandomMonster(userDetails), HttpStatus.OK);
     }
+
+    @GetMapping("/monster")
+    public ResponseEntity<?> getMonster(@AuthenticationPrincipal UserDetailsImpl userDetails)
+    {
+        return new ResponseEntity<>(monsterService.getAllMonster(userDetails), HttpStatus.OK);
+    }
+
 
     @PostMapping("/monster")
     public ResponseEntity<?> addMosnter(@AuthenticationPrincipal UserDetailsImpl userDetails,
